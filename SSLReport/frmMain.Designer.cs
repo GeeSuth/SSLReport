@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             txt_Url = new TextBox();
             groupBox = new GroupBox();
             check_forceWay = new CheckBox();
@@ -46,15 +47,19 @@
             colum_isPublic = new ColumnHeader();
             colum_expireDate = new ColumnHeader();
             colum_expireInDay = new ColumnHeader();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            toolStrip_UpdateOnce = new ToolStripMenuItem();
+            toolStrip_RemoveOnce = new ToolStripMenuItem();
+            openInBrowserToolStripMenuItem = new ToolStripMenuItem();
+            toolStrip_ViewOnce = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            toolStrip_UpdateAll = new ToolStripMenuItem();
+            toolStrip_RemoveAll = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            installToolStripMenuItem = new ToolStripMenuItem();
+            dawnloadToolStripMenuItem = new ToolStripMenuItem();
             list_logs = new ListView();
             columnHeader8 = new ColumnHeader();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            toolStripMenuItem1 = new ToolStripMenuItem();
-            toolStripMenuItem2 = new ToolStripMenuItem();
-            toolStripSeparator1 = new ToolStripSeparator();
-            toolStripMenuItem3 = new ToolStripMenuItem();
-            toolStripMenuItem4 = new ToolStripMenuItem();
-            toolStripMenuItem5 = new ToolStripMenuItem();
             groupBox.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
@@ -66,6 +71,7 @@
             txt_Url.Size = new Size(253, 21);
             txt_Url.TabIndex = 0;
             txt_Url.Text = "google.com";
+            txt_Url.Leave += txt_Url_Leave;
             // 
             // groupBox
             // 
@@ -79,14 +85,13 @@
             groupBox.Controls.Add(btnAddToList);
             groupBox.Location = new Point(12, 12);
             groupBox.Name = "groupBox";
-            groupBox.Size = new Size(776, 107);
+            groupBox.Size = new Size(776, 86);
             groupBox.TabIndex = 1;
             groupBox.TabStop = false;
             // 
             // check_forceWay
             // 
-            check_forceWay.Enabled = false;
-            check_forceWay.Location = new Point(266, 70);
+            check_forceWay.Location = new Point(549, 15);
             check_forceWay.Name = "check_forceWay";
             check_forceWay.Size = new Size(104, 24);
             check_forceWay.TabIndex = 8;
@@ -127,7 +132,9 @@
             // 
             // checkBox_isPublic
             // 
-            checkBox_isPublic.Location = new Point(70, 70);
+            checkBox_isPublic.Checked = true;
+            checkBox_isPublic.CheckState = CheckState.Checked;
+            checkBox_isPublic.Location = new Point(440, 15);
             checkBox_isPublic.Name = "checkBox_isPublic";
             checkBox_isPublic.Size = new Size(104, 24);
             checkBox_isPublic.TabIndex = 4;
@@ -135,11 +142,11 @@
             // 
             // btnAddToList
             // 
-            btnAddToList.Location = new Point(385, 14);
+            btnAddToList.Location = new Point(440, 39);
             btnAddToList.Name = "btnAddToList";
-            btnAddToList.Size = new Size(75, 50);
+            btnAddToList.Size = new Size(213, 28);
             btnAddToList.TabIndex = 5;
-            btnAddToList.Text = "Add To List";
+            btnAddToList.Text = "Add && Start Scan";
             btnAddToList.Click += btnAddToList_Click;
             // 
             // listUrl
@@ -147,9 +154,9 @@
             listUrl.Columns.AddRange(new ColumnHeader[] { colum_sn, colum_working, colum_name, colum_url, colum_isPublic, colum_expireDate, colum_expireInDay });
             listUrl.ContextMenuStrip = contextMenuStrip1;
             listUrl.FullRowSelect = true;
-            listUrl.Location = new Point(12, 125);
+            listUrl.Location = new Point(12, 104);
             listUrl.Name = "listUrl";
-            listUrl.Size = new Size(776, 313);
+            listUrl.Size = new Size(776, 334);
             listUrl.TabIndex = 2;
             listUrl.UseCompatibleStateImageBehavior = false;
             listUrl.View = View.Details;
@@ -188,6 +195,84 @@
             colum_expireInDay.Text = "Expire In Day?";
             colum_expireInDay.Width = 100;
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { toolStrip_UpdateOnce, toolStrip_RemoveOnce, openInBrowserToolStripMenuItem, toolStrip_ViewOnce, toolStripSeparator1, toolStrip_UpdateAll, toolStrip_RemoveAll, toolStripSeparator2, installToolStripMenuItem, dawnloadToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(162, 192);
+            // 
+            // toolStrip_UpdateOnce
+            // 
+            toolStrip_UpdateOnce.Image = (Image)resources.GetObject("toolStrip_UpdateOnce.Image");
+            toolStrip_UpdateOnce.Name = "toolStrip_UpdateOnce";
+            toolStrip_UpdateOnce.Size = new Size(161, 22);
+            toolStrip_UpdateOnce.Text = "Update";
+            toolStrip_UpdateOnce.Click += toolStrip_UpdateOnce_Click;
+            // 
+            // toolStrip_RemoveOnce
+            // 
+            toolStrip_RemoveOnce.Image = (Image)resources.GetObject("toolStrip_RemoveOnce.Image");
+            toolStrip_RemoveOnce.Name = "toolStrip_RemoveOnce";
+            toolStrip_RemoveOnce.Size = new Size(161, 22);
+            toolStrip_RemoveOnce.Text = "Remove";
+            toolStrip_RemoveOnce.Click += toolStrip_RemoveOnce_Click;
+            // 
+            // openInBrowserToolStripMenuItem
+            // 
+            openInBrowserToolStripMenuItem.Image = (Image)resources.GetObject("openInBrowserToolStripMenuItem.Image");
+            openInBrowserToolStripMenuItem.Name = "openInBrowserToolStripMenuItem";
+            openInBrowserToolStripMenuItem.Size = new Size(161, 22);
+            openInBrowserToolStripMenuItem.Text = "Open In browser";
+            openInBrowserToolStripMenuItem.Click += openInBrowserToolStripMenuItem_Click;
+            // 
+            // toolStrip_ViewOnce
+            // 
+            toolStrip_ViewOnce.Image = (Image)resources.GetObject("toolStrip_ViewOnce.Image");
+            toolStrip_ViewOnce.Name = "toolStrip_ViewOnce";
+            toolStrip_ViewOnce.Size = new Size(161, 22);
+            toolStrip_ViewOnce.Text = "View Details";
+            toolStrip_ViewOnce.Click += toolStrip_ViewOnce_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(158, 6);
+            // 
+            // toolStrip_UpdateAll
+            // 
+            toolStrip_UpdateAll.Image = (Image)resources.GetObject("toolStrip_UpdateAll.Image");
+            toolStrip_UpdateAll.Name = "toolStrip_UpdateAll";
+            toolStrip_UpdateAll.Size = new Size(161, 22);
+            toolStrip_UpdateAll.Text = "Update All";
+            toolStrip_UpdateAll.Click += toolStrip_UpdateAll_Click;
+            // 
+            // toolStrip_RemoveAll
+            // 
+            toolStrip_RemoveAll.Image = (Image)resources.GetObject("toolStrip_RemoveAll.Image");
+            toolStrip_RemoveAll.Name = "toolStrip_RemoveAll";
+            toolStrip_RemoveAll.Size = new Size(161, 22);
+            toolStrip_RemoveAll.Text = "Remove All";
+            toolStrip_RemoveAll.Click += toolStrip_RemoveAll_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(158, 6);
+            // 
+            // installToolStripMenuItem
+            // 
+            installToolStripMenuItem.Enabled = false;
+            installToolStripMenuItem.Name = "installToolStripMenuItem";
+            installToolStripMenuItem.Size = new Size(161, 22);
+            installToolStripMenuItem.Text = "Install";
+            // 
+            // dawnloadToolStripMenuItem
+            // 
+            dawnloadToolStripMenuItem.Enabled = false;
+            dawnloadToolStripMenuItem.Name = "dawnloadToolStripMenuItem";
+            dawnloadToolStripMenuItem.Size = new Size(161, 22);
+            dawnloadToolStripMenuItem.Text = "Dawnload ";
+            // 
             // list_logs
             // 
             list_logs.Columns.AddRange(new ColumnHeader[] { columnHeader8 });
@@ -204,47 +289,6 @@
             columnHeader8.Text = "Logs.";
             columnHeader8.Width = 1000;
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2, toolStripMenuItem5, toolStripSeparator1, toolStripMenuItem3, toolStripMenuItem4 });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(138, 120);
-            // 
-            // toolStripMenuItem1
-            // 
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(137, 22);
-            toolStripMenuItem1.Text = "Update";
-            // 
-            // toolStripMenuItem2
-            // 
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(137, 22);
-            toolStripMenuItem2.Text = "Remove";
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(134, 6);
-            // 
-            // toolStripMenuItem3
-            // 
-            toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(137, 22);
-            toolStripMenuItem3.Text = "Update All";
-            // 
-            // toolStripMenuItem4
-            // 
-            toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new Size(137, 22);
-            toolStripMenuItem4.Text = "Remove All";
-            // 
-            // toolStripMenuItem5
-            // 
-            toolStripMenuItem5.Name = "toolStripMenuItem5";
-            toolStripMenuItem5.Size = new Size(137, 22);
-            toolStripMenuItem5.Text = "View Details";
-            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -255,6 +299,7 @@
             Controls.Add(listUrl);
             Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterScreen;
@@ -291,11 +336,15 @@
         private ListView list_logs;
         private ColumnHeader columnHeader8;
         private ContextMenuStrip contextMenuStrip1;
-        private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripMenuItem toolStripMenuItem2;
-        private ToolStripMenuItem toolStripMenuItem5;
+        private ToolStripMenuItem toolStrip_UpdateOnce;
+        private ToolStripMenuItem toolStrip_RemoveOnce;
+        private ToolStripMenuItem toolStrip_ViewOnce;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripMenuItem toolStripMenuItem3;
-        private ToolStripMenuItem toolStripMenuItem4;
+        private ToolStripMenuItem toolStrip_UpdateAll;
+        private ToolStripMenuItem toolStrip_RemoveAll;
+        private ToolStripMenuItem openInBrowserToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem installToolStripMenuItem;
+        private ToolStripMenuItem dawnloadToolStripMenuItem;
     }
 }

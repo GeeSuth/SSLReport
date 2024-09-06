@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageIcon>4263529_browser_certificate_ssl_window_icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +26,13 @@
 
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\GeeSuth-Acer\Downloads\4263529_browser_certificate_ssl_window_icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

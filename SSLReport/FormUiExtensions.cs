@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SSLReport
 {
-    internal static class CrossThreadExtensions
+    internal static class FormUiExtensions
     {
         public static void PerformSafely(this Control target, Action action) 
         { 
@@ -18,6 +18,19 @@ namespace SSLReport
             {
                 action();
             }
+        }
+
+
+        public static ListViewItem AddWithKey(this ListViewItem itemRow, string key, string value)
+        {
+            itemRow.SubItems.Add(new ListViewItem.ListViewSubItem()
+            {
+                Name = key,
+                Text = value,
+                Tag = itemRow
+            });
+
+            return itemRow;
         }
     }
 }
