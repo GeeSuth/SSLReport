@@ -107,6 +107,9 @@ namespace SSLReport
             itemUrl.AddWithKey("colum_expireInDay", expireInDaty);
 
 
+            itemUrl.AddWithKey("colum_serial", item.SerialNumber ?? "-");
+
+
             itemUrl.Tag = item;
             listUrl.Items.Add(itemUrl);
 
@@ -158,6 +161,11 @@ namespace SSLReport
                         .SubItems["colum_expireInDay"]!.Text = item.ExpireInDays.GetValueOrDefault().ToString("0.00");
 
 
+
+                    listUrl.Items[IndexRow]
+                        .SubItems["colum_serial"]!.Text = item.SerialNumber;
+
+
                     listUrl.Items[IndexRow].ForeColor = Color.Green;
 
                 }
@@ -197,7 +205,7 @@ namespace SSLReport
                 using (TcpClient client = new TcpClient())
                 {
 
-                    if(item.ForceWay) client.NoDelay = true;
+                    if (item.ForceWay) client.NoDelay = true;
 
                     AddToLogs($"Open connecting.. {item.Url}");
                     await client.ConnectAsync(Url, 443);
@@ -212,7 +220,7 @@ namespace SSLReport
 
                         if (item.ForceWay)
                         {
-                            sslStream.AuthenticateAsClient(Url, null, 
+                            sslStream.AuthenticateAsClient(Url, null,
                                 System.Security.Authentication.SslProtocols.Tls12,
                                 checkCertificateRevocation: false
                             );
@@ -221,12 +229,13 @@ namespace SSLReport
                         {
                             sslStream.AuthenticateAsClient(Url);
                         }
-                       
+
 
                         X509Certificate2 certificate = new X509Certificate2(sslStream.RemoteCertificate!);
                         AddToLogs($"Finish Reading {item.Name} Expire @ {certificate.NotAfter}");
                         item.ExpireDate = certificate.NotAfter;
                         item.AlternativeNames = GetSubjectAlternativeNames(certificate);
+                        item.SerialNumber = certificate.SerialNumber;
                         return item;
                     }
                 }
@@ -372,6 +381,74 @@ namespace SSLReport
         private void txt_Url_Leave(object sender, EventArgs e)
         {
             txt_Name.Text = txt_Url.Text;
+        }
+
+        private void copyRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listUrl.SelectedItems.Count >= 1)
+            {
+                try
+                {
+                    int index = listUrl.SelectedItems[0].Index;
+                    var row = (ItemDto)listUrl.Items[index]!.Tag;
+
+                    Clipboard.SetText(JsonSerializer.Serialize(row));
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private void copyURLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listUrl.SelectedItems.Count >= 1)
+            {
+                try
+                {
+                    int index = listUrl.SelectedItems[0].Index;
+                    var row = (ItemDto)listUrl.Items[index]!.Tag;
+
+                    Clipboard.SetText("URL :"+ row?.Url??"");
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private void copyExpireDateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listUrl.SelectedItems.Count >= 1)
+            {
+                try
+                {
+                    int index = listUrl.SelectedItems[0].Index;
+                    var row = (ItemDto)listUrl.Items[index]!.Tag;
+
+                    Clipboard.SetText("Expire Date :"+row?.ExpireDate.GetValueOrDefault().ToString("yyyy-MM-dd hh:mm") ?? "");
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private void copySerialNumberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listUrl.SelectedItems.Count >= 1)
+            {
+                try
+                {
+                    int index = listUrl.SelectedItems[0].Index;
+                    var row = (ItemDto)listUrl.Items[index]!.Tag;
+
+                    Clipboard.SetText("Serial Number :"+row?.SerialNumber ?? "");
+                }
+                catch
+                {
+                }
+            }
         }
     }
 }

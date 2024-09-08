@@ -22,6 +22,8 @@ namespace SSLReport
 
         public List<string>? AlternativeNames { get; set; }
 
+        public string? SerialNumber { get; set; } = "";
+
     }
 
     public enum WorkingState
